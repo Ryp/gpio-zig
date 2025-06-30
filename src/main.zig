@@ -28,7 +28,7 @@ pub fn amp_relay_daemon() !void {
     const chip = c.gpiod_chip_open(chip_device_path) orelse return MyErrors.ChipOpenError;
     defer c.gpiod_chip_close(chip);
 
-    var line_settings = c.gpiod_line_settings_new();
+    const line_settings = c.gpiod_line_settings_new();
     defer c.gpiod_line_settings_free(line_settings);
 
     if (c.gpiod_line_settings_set_direction(line_settings, c.GPIOD_LINE_DIRECTION_OUTPUT) < 0) {
@@ -37,7 +37,7 @@ pub fn amp_relay_daemon() !void {
 
     c.gpiod_line_settings_set_active_low(line_settings, is_line_active_low);
 
-    var line_config = c.gpiod_line_config_new();
+    const line_config = c.gpiod_line_config_new();
     defer c.gpiod_line_config_free(line_config);
 
     if (c.gpiod_line_config_add_line_settings(line_config, &line_index, 1, line_settings) < 0) {
@@ -53,7 +53,7 @@ pub fn amp_relay_daemon() !void {
     }
     var amp_on = false;
 
-    var loop = true;
+    const loop = true;
     var was_music_playing = false;
     var last_music_playing_timestamp: std.time.Instant = undefined;
 
