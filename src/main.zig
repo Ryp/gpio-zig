@@ -21,7 +21,7 @@ pub fn amp_relay_daemon() !void {
     const chip_device_path = "/dev/gpiochip0";
     const line_index: u32 = 17; // GPIO 17 on a Raspi4
     const is_line_active_low = true; // The way I'm wiring the relay requires this.
-    const amp_timeout_ns: u64 = 5 * std.time.ns_per_s; // Duration after which the amp turns off when not playing music
+    const amp_timeout_ns: u64 = 5 * std.time.ns_per_min; // Duration after which the amp turns off when not playing music
     const loop_sleep_time_ns: u64 = 1 * std.time.ns_per_s; // Sleep interval between each loop iteration
 
     // NOTE: Need proper rights to be able to do that
